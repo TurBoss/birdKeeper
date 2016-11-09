@@ -464,6 +464,7 @@ void loop() {
 
       int startMins = data.startMin + (data.daysRun * minsDay);
       int startHours = data.startHour;
+      int startSecs = data.startSec;
 
       if (startMins > 59) {
         startHours++;
@@ -472,7 +473,7 @@ void loop() {
         startHours = 0;
       }
 
-      if ((hour() == startHours) and (minute() == startMins) and (startFadingIn == 0)) {
+      if ((hour() == startHours) and (minute() == startMins) and (second() == startSecs) and (startFadingIn == 0)) {
         Serial.println("Start Fading");
 
         hoursInSecs = data.fadeHour * 3600;
@@ -492,19 +493,20 @@ void loop() {
       if (startFadingIn) {
         if (secs < maxSecs) {
           Serial.print("Fading in: ");
-          Serial.println(fade);          
+          Serial.println(fade);
           analogWrite(LEDS, fade);
           fade += fadeInc;
           secs++;
         }
         else {
           startFadingOut = 0;
-          analogWrite(LEDS, HIGH);
+          analogWrite(LEDS, 4095);
         }
       }
-      
+
       int stopMins = data.stopMin + (data.daysRun * minsDay);
       int stopHours = data.stopHour;
+      int stopSecs = data.stopSec;
 
       if (stopMins > 59) {
         stopHours++;
@@ -512,7 +514,8 @@ void loop() {
       if (stopHours > 23) {
         stopHours = 0;
       }
-      if ((hour() == stopHours) and (minute() == stopMins) and (startFadingOut == 0)) {
+
+      if ((hour() == stopHours) and (minute() == stopMins) and (second() == stopSecs) and (startFadingOut == 0)) {
         Serial.println("Stop Fading");
 
         hoursInSecs = data.fadeHour * 3600;
@@ -532,14 +535,14 @@ void loop() {
       if (startFadingOut) {
         if (secs < maxSecs) {
           Serial.print("Fading out: ");
-          Serial.println(fade);          
+          Serial.println(fade);
           analogWrite(LEDS, fade);
           fade -= fadeDec;
           secs++;
         }
         else {
-          startFadingIn = 0; 
-          analogWrite(LEDS, LOW);
+          startFadingIn = 0;
+          analogWrite(LEDS, 0);
         }
       }
     }

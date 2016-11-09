@@ -231,9 +231,9 @@ void handleMenu(char keyPressed) {
       }
 
       // Set Date
-/*
+      /*
       else if ( edit_mm2_m1_DD ) {
-        
+
         if ( data.intervalEndHour < 24 ) {
           data.intervalEndHour += 1;
           if ( data.intervalEndHour == 24 ) {
@@ -272,7 +272,7 @@ void handleMenu(char keyPressed) {
           screen->print(data.intervalEndSec);
         }
       }
-*/
+      */
       else {
         ms.next(true);
         displayMenu();

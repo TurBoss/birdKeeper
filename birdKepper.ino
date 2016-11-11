@@ -509,6 +509,11 @@ void loop() {
       int stopHours = data.stopHour;
       int stopSecs = data.stopSec;
 
+      
+      int fadeHour = data.fadeHour;
+      int fadeMin = data.fadeMin;
+      int fadeSec= data.fadeSec;
+
       if (startMins > 59) {
         startHours++;
       }
@@ -549,6 +554,7 @@ void loop() {
           secs++;
         }
         else {
+          secs = 0;
           startFadingIn = 0;
           startFadingOut = 0;
           analogWrite(LEDS, 4095);
@@ -569,7 +575,7 @@ void loop() {
         Serial.print("FADE OUT TIME :");
         Serial.print(maxSecs);
         Serial.print(" steps of ");
-        Serial.println(fadeInc);
+        Serial.println(fadeDec);
       }
 
       if (startFadingOut) {
@@ -581,17 +587,36 @@ void loop() {
           secs++;
         }
         else {
+          secs = 0;
           startFadingOut = 0;
           startFadingIn = 0;
           analogWrite(LEDS, 0);
         }
       }
 
-      if ((hour() == startHours + intervalStartHour) and (minute() == startMins + intervalStartMin) and (second() == startSecs + intervalStartSec)) {
+      if ((hour() == startHours + fadeHour + intervalStartHour) and (minute() == startMins + fadeMin + intervalStartMin) and (second() == startSecs + fadeSec + intervalStartSec)) {
+        Serial.println("Start fading out");
+        
+        hoursInSecs = fadeHour * 3600;
+        minutesInSecs = fadeMin * 60;
+        maxSecs = hoursInSecs + minutesInSecs;
+
+        fade = pwmResolution;
+        fadeDec = (float)pwmResolution / (float)maxSecs;
+        
         startFadingOut = 1;
       }
 
-      if ((hour() == stopHours - intervalStopHour) and (minute() == stopMins - intervalStopMin) and (second() == stopSecs - intervalStopSec)) {
+      if ((hour() == stopHours - fadeHour - intervalStopHour) and (minute() == stopMins - fadeMin - intervalStopMin) and (second() == stopSecs - fadeSec - intervalStopSec)) {
+        Serial.println("Start fading in");
+        
+        hoursInSecs = fadeHour * 3600;
+        minutesInSecs = fadeMin * 60;
+        maxSecs = hoursInSecs + minutesInSecs;
+
+        fade = 0;
+        fadeInc = (float)pwmResolution / (float)maxSecs;
+        
         startFadingIn = 1;
       }
 

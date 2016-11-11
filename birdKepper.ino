@@ -492,15 +492,15 @@ void loop() {
     Serial.println(year());
 
     if ( data.processRunning ) {
-      
+
       int intervalStartHour = data.intervalStartHour;
       int intervalStartMin = data.intervalStartMin;
       int intervalStartSec = data.intervalStartSec;
-    
+
       int intervalStopHour = data.intervalStopHour;
       int intervalStopMin = data.intervalStopMin;
       int intervalStopSec = data.intervalStopSec;
-      
+
       int startMins = data.startMin + (data.daysRun * minsDay);
       int startHours = data.startHour;
       int startSecs = data.startSec;
@@ -586,7 +586,7 @@ void loop() {
           analogWrite(LEDS, 0);
         }
       }
-      
+
       if ((hour() == startHours + intervalStartHour) and (minute() == startMins + intervalStartMin) and (second() == startSecs + intervalStartSec)) {
         startFadingOut = 1;
       }
@@ -594,7 +594,7 @@ void loop() {
       if ((hour() == stopHours - intervalStopHour) and (minute() == stopMins - intervalStopMin) and (second() == stopSecs - intervalStopSec)) {
         startFadingIn = 1;
       }
-      
+
     }
   }
 
@@ -609,3 +609,7 @@ void serialEvent() {
     handleMenu(keyPressed);
   }
 }
+
+
+
+

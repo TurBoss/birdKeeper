@@ -222,12 +222,12 @@ void on_mm2_m2_SS(MenuItem* p_menu_item) {
 void on_m_SAVE(MenuItem* p_menu_item) {
 
   if (saveTime) {
-    setTime(setHour, setMin, setSec, setDay, setMonth, setYear); 
+    setTime(setHour, setMin, setSec, setDay, setMonth, setYear);
     saveTime = false;
   }
-  
+
   configured = true;
-  
+
   EEPROM.put(configAddr, configured);
   EEPROM.put(dataAddr, data);
 }
@@ -253,3 +253,7 @@ void on_m_RUN(MenuItem* p_menu_item) {
     digitalWrite(TEST_LED1, HIGH);
   }
 }
+
+
+
+

@@ -231,7 +231,7 @@ void handleMenu(char keyPressed) {
       }
 
       // Set Date
-      
+
       else if ( edit_mm2_m1_DD ) {
 
         if ( setDay < 32 ) {
@@ -280,7 +280,7 @@ void handleMenu(char keyPressed) {
       }
 
       // Set Hour
-      
+
       else if ( edit_mm2_m2_HH ) {
 
         if ( setHour < 24 ) {
@@ -564,7 +564,7 @@ void handleMenu(char keyPressed) {
       }
 
       // Set Date
-      
+
       else if ( edit_mm2_m1_DD ) {
 
         if ( setDay > -1 ) {
@@ -613,7 +613,7 @@ void handleMenu(char keyPressed) {
       }
 
       // Set Hour
-      
+
       else if ( edit_mm2_m2_HH ) {
 
         if ( setHour > -1 ) {
@@ -801,3 +801,7 @@ void handleMenu(char keyPressed) {
       break;
   }
 }
+
+
+
+

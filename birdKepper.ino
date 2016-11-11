@@ -33,7 +33,9 @@ int configAddr = 0; // Stores if the device is configured
 int dataAddr = 10; // Stores the main data in a Settings Struct
 
 bool configured = false;
+
 int processRuning = 0;
+
 int startFadingIn = 0;
 int startFadingOut = 0;
 
@@ -490,9 +492,22 @@ void loop() {
     Serial.println(year());
 
     if ( data.processRunning ) {
+      
+      int intervalStartHour = data.intervalStartHour;
+      int intervalStartMin = data.intervalStartMin;
+      int intervalStartSec = data.intervalStartSec;
+    
+      int intervalStopHour = data.intervalStopHour;
+      int intervalStopMin = data.intervalStopMin;
+      int intervalStopSec = data.intervalStopSec;
+      
       int startMins = data.startMin + (data.daysRun * minsDay);
       int startHours = data.startHour;
       int startSecs = data.startSec;
+
+      int stopMins = data.stopMin + (data.daysRun * minsDay);
+      int stopHours = data.stopHour;
+      int stopSecs = data.stopSec;
 
       if (startMins > 59) {
         startHours++;
@@ -501,7 +516,14 @@ void loop() {
         startHours = 0;
       }
 
-      if ((hour() == startHours) and (minute() == startMins) and (second() == startSecs) and (startFadingIn == 0)) {
+      if (stopMins > 59) {
+        stopHours++;
+      }
+      if (stopHours > 23) {
+        stopHours = 0;
+      }
+
+      if ((hour() == startHours) and (minute() == startMins) and (second() == startSecs)) {
         Serial.println("Start Fading");
 
         hoursInSecs = data.fadeHour * 3600;
@@ -527,23 +549,13 @@ void loop() {
           secs++;
         }
         else {
+          startFadingIn = 0;
           startFadingOut = 0;
           analogWrite(LEDS, 4095);
         }
       }
 
-      int stopMins = data.stopMin + (data.daysRun * minsDay);
-      int stopHours = data.stopHour;
-      int stopSecs = data.stopSec;
-
-      if (stopMins > 59) {
-        stopHours++;
-      }
-      if (stopHours > 23) {
-        stopHours = 0;
-      }
-
-      if ((hour() == stopHours) and (minute() == stopMins) and (second() == stopSecs) and (startFadingOut == 0)) {
+      if ((hour() == stopHours) and (minute() == stopMins) and (second() == stopSecs)) {
         Serial.println("Stop Fading");
 
         hoursInSecs = data.fadeHour * 3600;
@@ -569,10 +581,20 @@ void loop() {
           secs++;
         }
         else {
+          startFadingOut = 0;
           startFadingIn = 0;
           analogWrite(LEDS, 0);
         }
       }
+      
+      if ((hour() == startHours + intervalStartHour) and (minute() == startMins + intervalStartMin) and (second() == startSecs + intervalStartSec)) {
+        startFadingOut = 1;
+      }
+
+      if ((hour() == stopHours - intervalStopHour) and (minute() == stopMins - intervalStopMin) and (second() == stopSecs - intervalStopSec)) {
+        startFadingIn = 1;
+      }
+      
     }
   }
 

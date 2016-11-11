@@ -22,6 +22,11 @@
 
 // Variables
 
+
+int startDateDay = 1;
+
+int previousDay = 0;
+
 bool debug = true;
 bool backlightOn = true;
 int backlightCounter = 30;
@@ -205,6 +210,8 @@ struct Settings {
 };
 
 Settings data;
+
+
 
 time_t getTeensy3Time()
 {
@@ -478,6 +485,11 @@ void loop() {
   if (currentMillis - previousMillis > interval) {
     previousMillis = currentMillis;
 
+    if (day() != previousDay) {
+      previousDay = day();
+      data.daysRun += 1;
+    }
+
     Serial.print("Hour: ");
     Serial.print(hour());
     Serial.print(":");
@@ -509,7 +521,6 @@ void loop() {
       int stopHours = data.stopHour;
       int stopSecs = data.stopSec;
 
-      
       int fadeHour = data.fadeHour;
       int fadeMin = data.fadeMin;
       int fadeSec= data.fadeSec;

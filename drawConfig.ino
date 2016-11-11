@@ -112,19 +112,19 @@ void drawConfig() {
       screen->setCursor(5, 2);
       screen->print("  ");
       screen->setCursor(5, 2);
-      screen->print(day());
+      screen->print(setDay);
     }
     else if (edit_mm2_m1_MM) {
       screen->setCursor(5, 2);
       screen->print("  ");
       screen->setCursor(5, 2);
-      screen->print(month());
+      screen->print(setMonth);
     }
     else if (edit_mm2_m1_YY) {
       screen->setCursor(5, 2);
       screen->print("  ");
       screen->setCursor(5, 2);
-      screen->print(year());
+      screen->print(setYear);
     }
   }
   else if (editMenu == 8) {
@@ -132,19 +132,19 @@ void drawConfig() {
       screen->setCursor(5, 2);
       screen->print("  ");
       screen->setCursor(5, 2);
-      screen->print(day());
+      screen->print(setHour);
     }
     else if (edit_mm2_m2_MM) {
       screen->setCursor(5, 2);
       screen->print("  ");
       screen->setCursor(5, 2);
-      screen->print(month());
+      screen->print(setMin);
     }
     else if (edit_mm2_m2_SS) {
       screen->setCursor(5, 2);
       screen->print("  ");
       screen->setCursor(5, 2);
-      screen->print(year());
+      screen->print(setSec);
     }
   }
   drawSetup = false;

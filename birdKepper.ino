@@ -45,6 +45,16 @@ unsigned long backlightInterval = 1000;
 
 int minsDay = 3; // Mins to Decrease start time
 
+bool saveTime = false;
+
+int setDay = 0;
+int setMonth = 0;
+int setYear = 0;
+
+int setHour = 0;
+int setMin = 0;
+int setSec = 0;
+
 bool edit_mm1_m1_HH = false;
 bool edit_mm1_m1_MM = false;
 bool edit_mm1_m1_SS = false;
@@ -217,6 +227,14 @@ void setup() {
   } else {
     Serial.println("RTC has set the system time");
   }
+
+  setDay = day();
+  setMonth = month();
+  setYear = year();
+  setHour = hour();
+  setMin = minute();
+  setSec = second();
+
 
   pinMode(BUTTON_UP, INPUT_PULLUP);
   pinMode(BUTTON_DOWN, INPUT_PULLUP);
@@ -428,6 +446,16 @@ void setup() {
 
 void loop() {
 
+  if (!saveTime) {
+
+    setDay = day();
+    setMonth = month();
+    setYear = year();
+    setHour = hour();
+    setMin = minute();
+    setSec = second();
+  }
+
   handleKeys();
 
   unsigned long currentMillis = millis();
@@ -445,23 +473,23 @@ void loop() {
     }
   }
 
-  if ( data.processRunning ) {
-    if (currentMillis - previousMillis > interval) {
-      previousMillis = currentMillis;
+  if (currentMillis - previousMillis > interval) {
+    previousMillis = currentMillis;
 
-      Serial.print("Hour: ");
-      Serial.print(hour());
-      Serial.print(":");
-      Serial.print(minute());
-      Serial.print(":");
-      Serial.print(second());
-      Serial.print(" ");
-      Serial.print(day());
-      Serial.print("/");
-      Serial.print(month());
-      Serial.print("/");
-      Serial.println(year());
+    Serial.print("Hour: ");
+    Serial.print(hour());
+    Serial.print(":");
+    Serial.print(minute());
+    Serial.print(":");
+    Serial.print(second());
+    Serial.print(" ");
+    Serial.print(day());
+    Serial.print("/");
+    Serial.print(month());
+    Serial.print("/");
+    Serial.println(year());
 
+    if ( data.processRunning ) {
       int startMins = data.startMin + (data.daysRun * minsDay);
       int startHours = data.startHour;
       int startSecs = data.startSec;

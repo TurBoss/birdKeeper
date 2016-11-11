@@ -231,48 +231,103 @@ void handleMenu(char keyPressed) {
       }
 
       // Set Date
-      /*
+      
       else if ( edit_mm2_m1_DD ) {
 
-        if ( data.intervalEndHour < 24 ) {
-          data.intervalEndHour += 1;
-          if ( data.intervalEndHour == 24 ) {
-            data.intervalEndHour = 0;
+        if ( setDay < 32 ) {
+          setDay += 1;
+          if ( setDay == 32 ) {
+            setDay = 0;
           }
+
+          saveTime = true;
 
           screen->setCursor(5, 2);
           screen->print("  ");
           screen->setCursor(5, 2);
-          screen->print(data.intervalEndHour);
+          screen->print(setDay);
         }
       }
       else if ( edit_mm2_m1_MM ) {
-        if ( data.intervalEndMin < 60 ) {
-          data.intervalEndMin += 1;
-          if ( data.intervalEndMin == 60 ) {
-            data.fadeMin = 0;
+        if ( setMonth < 13 ) {
+          setMonth += 1;
+          if ( setMonth == 13 ) {
+            setMonth = 0;
           }
+
+          saveTime = true;
 
           screen->setCursor(5, 2);
           screen->print("  ");
           screen->setCursor(5, 2);
-          screen->print(data.intervalEndMin);
+          screen->print(setMonth);
         }
       }
       else if ( edit_mm2_m1_YY ) {
-        if ( data.intervalEndSec < 60 ) {
-          data.intervalEndSec += 1;
-          if ( data.intervalEndSec == 60 ) {
-            data.intervalEndSec = 0;
+        if ( setYear < 3000 ) {
+          setYear += 1;
+          if ( setYear == 3000 ) {
+            setYear = 2000;
           }
+
+          saveTime = true;
 
           screen->setCursor(5, 2);
           screen->print("  ");
           screen->setCursor(5, 2);
-          screen->print(data.intervalEndSec);
+          screen->print(setYear);
         }
       }
-      */
+
+      // Set Hour
+      
+      else if ( edit_mm2_m2_HH ) {
+
+        if ( setHour < 24 ) {
+          setHour += 1;
+          if ( setHour == 24 ) {
+            setHour = 0;
+          }
+
+          saveTime = true;
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(setHour);
+        }
+      }
+      else if ( edit_mm2_m2_MM ) {
+        if ( setMin < 60 ) {
+          setMin += 1;
+          if ( setMin == 60 ) {
+            setMin = 0;
+          }
+
+          saveTime = true;
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(setMin);
+        }
+      }
+      else if ( edit_mm2_m2_SS ) {
+        if ( setSec < 60 ) {
+          setSec += 1;
+          if ( setSec == 60 ) {
+            setSec = 0;
+          }
+
+          saveTime = true;
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(setSec);
+        }
+      }
+
       else {
         ms.next(true);
         displayMenu();
@@ -508,6 +563,104 @@ void handleMenu(char keyPressed) {
         }
       }
 
+      // Set Date
+      
+      else if ( edit_mm2_m1_DD ) {
+
+        if ( setDay > -1 ) {
+          setDay -= 1;
+          if ( setDay == -1 ) {
+            setDay = 31;
+          }
+
+          saveTime = true;
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(setDay);
+        }
+      }
+      else if ( edit_mm2_m1_MM ) {
+        if ( setMonth > -1) {
+          setMonth -= 1;
+          if ( setMonth == -1 ) {
+            setMonth = 12;
+          }
+
+          saveTime = true;
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(setMonth);
+        }
+      }
+      else if ( edit_mm2_m1_YY ) {
+        if ( setYear > 1999 ) {
+          setYear -= 1;
+          if ( setYear == 1999 ) {
+            setYear = 3000;
+          }
+
+          saveTime = true;
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(setYear);
+        }
+      }
+
+      // Set Hour
+      
+      else if ( edit_mm2_m2_HH ) {
+
+        if ( setHour > -1 ) {
+          setHour -= 1;
+          if ( setHour == -1 ) {
+            setHour = 23;
+          }
+
+          saveTime = true;
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(setDay);
+        }
+      }
+      else if ( edit_mm2_m2_MM ) {
+        if ( setMin > -1) {
+          setMin -= 1;
+          if ( setMin == -1 ) {
+            setMin = 59;
+          }
+
+          saveTime = true;
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(setMin);
+        }
+      }
+      else if ( edit_mm2_m2_SS ) {
+        if ( setSec > -1 ) {
+          setSec -= 1;
+          if ( setSec == -1 ) {
+            setSec = 59;
+          }
+
+          saveTime = true;
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(setSec);
+        }
+      }
+
       else {
         ms.prev(true);
         displayMenu();
@@ -563,6 +716,24 @@ void handleMenu(char keyPressed) {
       }
       else if (edit_mm1_m6_DD) {
         edit_mm1_m6_DD = false;
+      }
+      else if (edit_mm2_m1_DD) {
+        edit_mm2_m1_DD = false;
+      }
+      else if (edit_mm2_m1_MM) {
+        edit_mm2_m1_MM = false;
+      }
+      else if (edit_mm2_m1_YY) {
+        edit_mm2_m1_YY = false;
+      }
+      else if (edit_mm2_m2_HH) {
+        edit_mm2_m2_HH = false;
+      }
+      else if (edit_mm2_m2_MM) {
+        edit_mm2_m2_MM = false;
+      }
+      else if (edit_mm2_m2_SS) {
+        edit_mm2_m2_SS = false;
       }
       else {
         ms.back();

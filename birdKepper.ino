@@ -488,6 +488,7 @@ void loop() {
     if (day() != previousDay) {
       previousDay = day();
       data.daysRun += 1;
+      EEPROM.put(dataAddr, data);
     }
 
     Serial.print("Hour: ");

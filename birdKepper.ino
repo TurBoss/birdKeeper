@@ -432,6 +432,10 @@ void setup() {
       digitalWrite(TEST_LED1, HIGH );
     }
 
+
+    data.daysRun = 0;
+    EEPROM.put(dataAddr, data);
+
   }
   else {
     screen->home();
@@ -485,11 +489,14 @@ void loop() {
   if (currentMillis - previousMillis > interval) {
     previousMillis = currentMillis;
 
+    /*
     if (day() != previousDay) {
       previousDay = day();
       data.daysRun += 1;
       EEPROM.put(dataAddr, data);
     }
+    */
+
 
     Serial.print("Hour: ");
     Serial.print(hour());
@@ -524,7 +531,7 @@ void loop() {
 
       int fadeHour = data.fadeHour;
       int fadeMin = data.fadeMin;
-      int fadeSec= data.fadeSec;
+      int fadeSec = data.fadeSec;
 
       if (startMins > 59) {
         startHours++;
@@ -608,27 +615,27 @@ void loop() {
 
       if ((hour() == startHours + fadeHour + intervalStartHour) and (minute() == startMins + fadeMin + intervalStartMin) and (second() == startSecs + fadeSec + intervalStartSec)) {
         Serial.println("Start fading out");
-        
+
         hoursInSecs = fadeHour * 3600;
         minutesInSecs = fadeMin * 60;
         maxSecs = hoursInSecs + minutesInSecs;
 
         fade = pwmResolution;
         fadeDec = (float)pwmResolution / (float)maxSecs;
-        
+
         startFadingOut = 1;
       }
 
       if ((hour() == stopHours - fadeHour - intervalStopHour) and (minute() == stopMins - fadeMin - intervalStopMin) and (second() == stopSecs - fadeSec - intervalStopSec)) {
         Serial.println("Start fading in");
-        
+
         hoursInSecs = fadeHour * 3600;
         minutesInSecs = fadeMin * 60;
         maxSecs = hoursInSecs + minutesInSecs;
 
         fade = 0;
         fadeInc = (float)pwmResolution / (float)maxSecs;
-        
+
         startFadingIn = 1;
       }
 

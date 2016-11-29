@@ -627,7 +627,7 @@ void handleMenu(char keyPressed) {
           screen->setCursor(5, 2);
           screen->print("  ");
           screen->setCursor(5, 2);
-          screen->print(setDay);
+          screen->print(setHour);
         }
       }
       else if ( edit_mm2_m2_MM ) {

@@ -433,11 +433,6 @@ void setup() {
     if ( data.processRunning == true ) {
       digitalWrite(TEST_LED1, HIGH );
     }
-
-
-    data.daysRun = 0;
-    EEPROM.put(dataAddr, data);
-
   }
   else {
     screen->home();
@@ -491,13 +486,11 @@ void loop() {
   if (currentMillis - previousMillis > interval) {
     previousMillis = currentMillis;
 
-    /*
     if (day() != previousDay) {
       previousDay = day();
       data.daysRun += 1;
       EEPROM.put(dataAddr, data);
     }
-    */
 
 
     Serial.print("Hour: ");

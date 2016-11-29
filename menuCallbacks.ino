@@ -223,6 +223,7 @@ void on_m_SAVE(MenuItem* p_menu_item) {
 
   if (saveTime) {
     setTime(setHour, setMin, setSec, setDay, setMonth, setYear);
+    Teensy3Clock.set(now());
     saveTime = false;
   }
 

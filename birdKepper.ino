@@ -228,6 +228,8 @@ void setup() {
   Serial.println("inicializacion");
 
   setSyncProvider(getTeensy3Time);
+  setSyncInterval(60);
+  setTime(getTeensy3Time());
 
   delay(100);
 

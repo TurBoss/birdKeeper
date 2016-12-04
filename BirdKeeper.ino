@@ -1,3 +1,27 @@
+/*-------------------------------------------------------------------------
+  Teensy 3.2 program to extend the day light duration for birds.
+
+  Written by TurBoss for JauriaStudios INC,
+
+  -------------------------------------------------------------------------
+  This file is part of the BirdKeeper.
+
+  BirdKeeper is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation, either version 3 of
+  the License, or (at your option) any later version.
+
+  BirdKeeper is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with BirdKeeper.  If not, see
+  <http://www.gnu.org/licenses/>.
+  -------------------------------------------------------------------------*/
+
+// Libs
 #include <TimeLib.h>
 #include <EEPROM.h>
 #include <Bounce2.h>
@@ -15,13 +39,12 @@
 
 // outputs
 
-#define LEDS 20
+#define PWM_LEDS 20
 #define TEST_LED0 11
 #define TEST_LED1 12
 #define TEST_LED2 13
 
 // Variables
-
 
 int startDateDay = 1;
 
@@ -29,7 +52,7 @@ int previousDay = 0;
 
 bool debug = true;
 bool backlightOn = true;
-int backlightCounter = 30;
+int backlightCounter = 60;
 
 bool drawSetup = false;
 int editMenu = 0;
@@ -50,7 +73,7 @@ unsigned long interval = 1000;
 unsigned long backlightPreviousMillis = 0;
 unsigned long backlightInterval = 1000;
 
-int minsDay = 3; // Mins to Decrease start time
+int minsDay = 2; // Mins to Decrease start time
 
 bool saveTime = false;
 
@@ -118,9 +141,7 @@ MenuSystem ms;
 
 Menu rm("Jauria Studios INC");
 
-
 Menu mm1("Ajuste hora");
-
 
 Menu mm1_m1("Amanecer");
 
@@ -152,14 +173,11 @@ MenuItem mm1_m5_HH("HH");
 MenuItem mm1_m5_MM("MM");
 MenuItem mm1_m5_SS("SS");
 
-
 Menu mm1_m6("Duracion dias");
 
 MenuItem mm1_m6_DD("DD");
 
-
 Menu mm2("Ajuste fecha/hora");
-
 
 Menu mm2_m1("Fecha");
 
@@ -177,9 +195,11 @@ MenuItem m_BACK("Volver");
 MenuItem m_SAVE("Guardar");
 MenuItem m_RUN("Ejecutar");
 
+// Init LCD display (20x4)
 LiquidCrystal_I2C lcd(0x3F, 2, 1, 0, 4, 5, 6, 7);
 LCD *screen = &lcd;
 
+// Settings stored data
 struct Settings {
 
   int daysMax; // Max days to run
@@ -211,8 +231,7 @@ struct Settings {
 
 Settings data;
 
-
-
+// Teensy time function
 time_t getTeensy3Time()
 {
   return Teensy3Clock.get();
@@ -220,6 +239,7 @@ time_t getTeensy3Time()
 
 // Standard arduino functions
 
+// Setup function
 void setup() {
 
 
@@ -252,7 +272,7 @@ void setup() {
   pinMode(BUTTON_LEFT, INPUT_PULLUP);
   pinMode(BUTTON_RIGHT, INPUT_PULLUP);
 
-  pinMode(LEDS, OUTPUT);
+  pinMode(PWM_LEDS, OUTPUT);
   pinMode(TEST_LED0, OUTPUT);
   pinMode(TEST_LED1, OUTPUT);
   pinMode(TEST_LED2, OUTPUT);
@@ -276,6 +296,7 @@ void setup() {
   right.interval(5);
 
   // Menu setup
+
   /*
     Menu Structure:
 
@@ -331,7 +352,6 @@ void setup() {
     -- Volver
     - Ejecutar
   */
-
 
   mm1_m1.add_item(&mm1_m1_HH, &on_mm1_m1_HH);
   mm1_m1.add_item(&mm1_m1_MM, &on_mm1_m1_MM);
@@ -454,6 +474,8 @@ void setup() {
 
 }
 
+
+// Main loop
 void loop() {
 
   if (!saveTime) {
@@ -486,12 +508,13 @@ void loop() {
   if (currentMillis - previousMillis > interval) {
     previousMillis = currentMillis;
 
-    if (day() != previousDay) {
+    /*
+      if (day() != previousDay) {
       previousDay = day();
       data.daysRun += 1;
       EEPROM.put(dataAddr, data);
-    }
-
+      }
+    */
 
     Serial.print("Hour: ");
     Serial.print(hour());
@@ -516,11 +539,11 @@ void loop() {
       int intervalStopMin = data.intervalStopMin;
       int intervalStopSec = data.intervalStopSec;
 
-      int startMins = data.startMin + (data.daysRun * minsDay);
+      int startMins = data.startMin; // - (data.daysRun * minsDay);
       int startHours = data.startHour;
       int startSecs = data.startSec;
 
-      int stopMins = data.stopMin + (data.daysRun * minsDay);
+      int stopMins = data.stopMin; // + (data.daysRun * minsDay);
       int stopHours = data.stopHour;
       int stopSecs = data.stopSec;
 
@@ -563,15 +586,16 @@ void loop() {
         if (secs < maxSecs) {
           Serial.print("Fading in: ");
           Serial.println(fade);
-          analogWrite(LEDS, fade);
+          analogWrite(PWM_LEDS, fade);
           fade += fadeInc;
           secs++;
         }
         else {
+          Serial.println("Fading in: 4095");
           secs = 0;
           startFadingIn = 0;
           startFadingOut = 0;
-          analogWrite(LEDS, 4095);
+          analogWrite(PWM_LEDS, 4095);
         }
       }
 
@@ -596,15 +620,16 @@ void loop() {
         if (secs < maxSecs) {
           Serial.print("Fading out: ");
           Serial.println(fade);
-          analogWrite(LEDS, fade);
+          analogWrite(PWM_LEDS, fade);
           fade -= fadeDec;
           secs++;
         }
         else {
+          Serial.println("Fading out: 0");
           secs = 0;
           startFadingOut = 0;
           startFadingIn = 0;
-          analogWrite(LEDS, 0);
+          analogWrite(PWM_LEDS, 0);
         }
       }
 
@@ -642,13 +667,10 @@ void loop() {
   }
 }
 
+// Read Serial port
 void serialEvent() {
   char keyPressed;
   if ((keyPressed = Serial.read()) > 0) {
     handleMenu(keyPressed);
   }
 }
-
-
-
-

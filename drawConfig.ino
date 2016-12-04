@@ -1,3 +1,26 @@
+/*-------------------------------------------------------------------------
+  Teensy 3.2 program to extend the day light duration for birds.
+
+  Written by TurBoss for JauriaStudios INC,
+
+  -------------------------------------------------------------------------
+  This file is part of the BirdKeeper.
+
+  BirdKeeper is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation, either version 3 of
+  the License, or (at your option) any later version.
+
+  BirdKeeper is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with BirdKepper.  If not, see
+  <http://www.gnu.org/licenses/>.
+  -------------------------------------------------------------------------*/
+
 void drawConfig() {
   if (editMenu == 1) {
     if (edit_mm1_m1_HH) {
@@ -149,7 +172,3 @@ void drawConfig() {
   }
   drawSetup = false;
 }
-
-
-
-

@@ -1,16 +1,36 @@
+/*-------------------------------------------------------------------------
+  Teensy 3.2 program to extend the day light duration for birds.
+
+  Written by TurBoss for JauriaStudios INC,
+
+  -------------------------------------------------------------------------
+  This file is part of the BirdKeeper.
+
+  BirdKeeper is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation, either version 3 of
+  the License, or (at your option) any later version.
+
+  BirdKeeper is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with BirdKepper.  If not, see
+  <http://www.gnu.org/licenses/>.
+  -------------------------------------------------------------------------*/
+
 void displayMenu() {
 
   // Display the menu
   Menu const* cp_menu = ms.get_current_menu();
-  //int menu_position = cp_menu->get_cur_menu_component_num();
 
   screen->clear();
   screen->setCursor(1, 0);
   screen->print(cp_menu->get_name());
   screen->setCursor(0, 2);
   screen->print(">>");
-
-  //MenuComponent const* cp_menu_sel = cp_menu->get_selected();
 
   int elements_num = cp_menu->get_num_menu_components();
   int selected_menu = cp_menu->get_cur_menu_component_num();
@@ -27,12 +47,10 @@ void displayMenu() {
     screen->print(cp_m_comp1->get_name());
   }
 
-
   MenuComponent const* cp_m_comp1 = cp_menu->get_menu_component(slot2);
 
   screen->setCursor(2, 2);
   screen->print(cp_m_comp1->get_name());
-
 
   if (slot3 < elements_num) {
 
@@ -41,9 +59,4 @@ void displayMenu() {
     screen->setCursor(2, 3);
     screen->print(cp_m_comp1->get_name());
   }
-
 }
-
-
-
-

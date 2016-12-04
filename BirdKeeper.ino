@@ -46,9 +46,6 @@
 
 // Variables
 
-int startDateDay = 1;
-
-int previousDay = 0;
 
 bool debug = true;
 bool backlightOn = true;
@@ -73,8 +70,6 @@ unsigned long interval = 1000;
 unsigned long backlightPreviousMillis = 0;
 unsigned long backlightInterval = 1000;
 
-int minsDay = 2; // Mins to Decrease start time
-
 bool saveTime = false;
 
 int setDay = 0;
@@ -85,27 +80,26 @@ int setHour = 0;
 int setMin = 0;
 int setSec = 0;
 
-bool edit_mm1_m1_HH = false;
-bool edit_mm1_m1_MM = false;
-bool edit_mm1_m1_SS = false;
+bool edit_mm1_m1_start_HH = false;
+bool edit_mm1_m1_start_MM = false;
+bool edit_mm1_m1_start_SS = false;
 
-bool edit_mm1_m2_HH = false;
-bool edit_mm1_m2_MM = false;
-bool edit_mm1_m2_SS = false;
+bool edit_mm1_m1_stop_HH = false;
+bool edit_mm1_m1_stop_MM = false;
+bool edit_mm1_m1_stop_SS = false;
+
+
+bool edit_mm1_m2_start_HH = false;
+bool edit_mm1_m2_start_MM = false;
+bool edit_mm1_m2_start_SS = false;
+
+bool edit_mm1_m2_stop_HH = false;
+bool edit_mm1_m2_stop_MM = false;
+bool edit_mm1_m2_stop_SS = false;
 
 bool edit_mm1_m3_HH = false;
 bool edit_mm1_m3_MM = false;
 bool edit_mm1_m3_SS = false;
-
-bool edit_mm1_m4_HH = false;
-bool edit_mm1_m4_MM = false;
-bool edit_mm1_m4_SS = false;
-
-bool edit_mm1_m5_HH = false;
-bool edit_mm1_m5_MM = false;
-bool edit_mm1_m5_SS = false;
-
-bool edit_mm1_m6_DD = false;
 
 bool edit_mm2_m1_DD = false;
 bool edit_mm2_m1_MM = false;
@@ -141,41 +135,41 @@ MenuSystem ms;
 
 Menu rm("Jauria Studios INC");
 
-Menu mm1("Ajuste hora");
+Menu mm1("Temporizador");
 
 Menu mm1_m1("Amanecer");
 
-MenuItem mm1_m1_HH("HH");
-MenuItem mm1_m1_MM("MM");
-MenuItem mm1_m1_SS("SS");
+Menu mm1_m1_start("Hora inicio");
+
+MenuItem mm1_m1_start_HH("HH");
+MenuItem mm1_m1_start_MM("MM");
+MenuItem mm1_m1_start_SS("SS");
+
+Menu mm1_m1_stop("Hora fin");
+
+MenuItem mm1_m1_stop_HH("HH");
+MenuItem mm1_m1_stop_MM("MM");
+MenuItem mm1_m1_stop_SS("SS");
 
 Menu mm1_m2("Anochecer");
 
-MenuItem mm1_m2_HH("HH");
-MenuItem mm1_m2_MM("MM");
-MenuItem mm1_m2_SS("SS");
+Menu mm1_m2_start("Hora inicio");
+
+MenuItem mm1_m2_start_HH("HH");
+MenuItem mm1_m2_start_MM("MM");
+MenuItem mm1_m2_start_SS("SS");
+
+Menu mm1_m2_stop("Hora fin");
+
+MenuItem mm1_m2_stop_HH("HH");
+MenuItem mm1_m2_stop_MM("MM");
+MenuItem mm1_m2_stop_SS("SS");
 
 Menu mm1_m3("Duracion");
 
 MenuItem mm1_m3_HH("HH");
 MenuItem mm1_m3_MM("MM");
 MenuItem mm1_m3_SS("SS");
-
-Menu mm1_m4("Intervalo Inicio");
-
-MenuItem mm1_m4_HH("HH");
-MenuItem mm1_m4_MM("MM");
-MenuItem mm1_m4_SS("SS");
-
-Menu mm1_m5("Intervalo Fin");
-
-MenuItem mm1_m5_HH("HH");
-MenuItem mm1_m5_MM("MM");
-MenuItem mm1_m5_SS("SS");
-
-Menu mm1_m6("Duracion dias");
-
-MenuItem mm1_m6_DD("DD");
 
 Menu mm2("Ajuste fecha/hora");
 
@@ -202,28 +196,25 @@ LCD *screen = &lcd;
 // Settings stored data
 struct Settings {
 
-  int daysMax; // Max days to run
-  unsigned long daysRun; // Day count
+  int morningStartHour; // Start fading on Morning
+  int morningStartMin;
+  int morningStartSec;
 
-  int startHour; // Start fading on
-  int startMin;
-  int startSec;
+  int morningStopHour; // Start fading off
+  int morningStopMin;
+  int morningStopSec;
+  
+  int nightStartHour; // Start fading on Night
+  int nightStartMin;
+  int nightStartSec;
 
-  int stopHour; // Start fading off
-  int stopMin;
-  int stopSec;
+  int nightStopHour; // Start fading off
+  int nightStopMin;
+  int nightStopSec;
 
   int fadeHour; // Time to fade the leds on and off
   int fadeMin;
   int fadeSec;
-
-  int intervalStartHour; // Lights interval
-  int intervalStartMin;
-  int intervalStartSec;
-
-  int intervalStopHour; // Lights interval
-  int intervalStopMin;
-  int intervalStopSec;
 
   bool processRunning; // Stores if the process is running
 
@@ -302,40 +293,37 @@ void setup() {
 
     - Ajuste horario
     -- Hora amanecer
-    --- HH
-    --- MM
-    --- SS
-    --- Guardar
-    --- Volver
+    ---- Hora inicio
+    ----- HH
+    ----- MM
+    ----- SS
+    ----- Guardar
+    ----- Volver
+    ---- Hora fin
+    ----- HH
+    ----- MM
+    ----- SS
+    ----- Guardar
+    ----- Volver
     -- Hora anochecer
-    --- HH
-    --- MM
-    --- SS
-    --- Guardar
-    --- Volver
-    -- Intervalo Inicio horas
-    --- HH
-    --- MM
-    --- SS
-    --- Guardar
-    --- Volver
-    -- Intervalo Fin horas
-    --- HH
-    --- MM
-    --- SS
-    --- Guardar
-    --- Volver
+    ---- Hora inicio
+    ----- HH
+    ----- MM
+    ----- SS
+    ----- Guardar
+    ----- Volver
+    ---- Hora fin
+    ----- HH
+    ----- MM
+    ----- SS
+    ----- Guardar
+    ----- Volver
     -- Duracion amanecer/anochecer
     --- HH
     --- MM
     --- SS
     --- Guardar
     --- Volver
-    -- Duracion dias
-    --- DD
-    --- Guardar
-    --- Volver
-    -- Volver
     - Fecha y hora
     -- Fecha
     --- DD
@@ -353,19 +341,38 @@ void setup() {
     - Ejecutar
   */
 
-  mm1_m1.add_item(&mm1_m1_HH, &on_mm1_m1_HH);
-  mm1_m1.add_item(&mm1_m1_MM, &on_mm1_m1_MM);
-  mm1_m1.add_item(&mm1_m1_SS, &on_mm1_m1_SS);
-  mm1_m1.add_item(&m_SAVE, &on_m_SAVE);
-  mm1_m1.add_item(&m_BACK, &on_m_BACK);
 
+  mm1_m1_start.add_item(&mm1_m1_start_HH, &on_mm1_m1_start_HH);
+  mm1_m1_start.add_item(&mm1_m1_start_MM, &on_mm1_m1_start_MM);
+  mm1_m1_start.add_item(&mm1_m1_start_SS, &on_mm1_m1_start_SS);
+  mm1_m1_start.add_item(&m_SAVE, &on_m_SAVE);
+  mm1_m1_start.add_item(&m_BACK, &on_m_BACK);
+  
+  mm1_m1_stop.add_item(&mm1_m1_stop_HH, &on_mm1_m1_stop_HH);
+  mm1_m1_stop.add_item(&mm1_m1_stop_MM, &on_mm1_m1_stop_MM);
+  mm1_m1_stop.add_item(&mm1_m1_stop_SS, &on_mm1_m1_stop_SS);
+  mm1_m1_stop.add_item(&m_SAVE, &on_m_SAVE);
+  mm1_m1_stop.add_item(&m_BACK, &on_m_BACK);
+
+  mm1_m1.add_menu(&mm1_m1_start);
+  mm1_m1.add_menu(&mm1_m1_stop);
+  
   mm1.add_menu(&mm1_m1);
 
-  mm1_m2.add_item(&mm1_m2_HH, &on_mm1_m2_HH);
-  mm1_m2.add_item(&mm1_m2_MM, &on_mm1_m2_MM);
-  mm1_m2.add_item(&mm1_m2_SS, &on_mm1_m2_SS);
-  mm1_m2.add_item(&m_SAVE, &on_m_SAVE);
-  mm1_m2.add_item(&m_BACK, &on_m_BACK);
+  mm1_m2_start.add_item(&mm1_m1_start_HH, &on_mm1_m1_start_HH);
+  mm1_m2_start.add_item(&mm1_m1_start_MM, &on_mm1_m1_start_MM);
+  mm1_m2_start.add_item(&mm1_m1_start_SS, &on_mm1_m1_start_SS);
+  mm1_m2_start.add_item(&m_SAVE, &on_m_SAVE);
+  mm1_m2_start.add_item(&m_BACK, &on_m_BACK);
+  
+  mm1_m2_stop.add_item(&mm1_m2_stop_HH, &on_mm1_m2_stop_HH);
+  mm1_m2_stop.add_item(&mm1_m2_stop_MM, &on_mm1_m2_stop_MM);
+  mm1_m2_stop.add_item(&mm1_m2_stop_SS, &on_mm1_m2_stop_SS);
+  mm1_m2_stop.add_item(&m_SAVE, &on_m_SAVE);
+  mm1_m2_stop.add_item(&m_BACK, &on_m_BACK);
+
+  mm1_m2.add_menu(&mm1_m2_start);
+  mm1_m2.add_menu(&mm1_m2_stop);
 
   mm1.add_menu(&mm1_m2);
 
@@ -376,31 +383,7 @@ void setup() {
   mm1_m3.add_item(&m_BACK, &on_m_BACK);
 
   mm1.add_menu(&mm1_m3);
-
-  mm1_m4.add_item(&mm1_m4_HH, &on_mm1_m4_HH);
-  mm1_m4.add_item(&mm1_m4_MM, &on_mm1_m4_MM);
-  mm1_m4.add_item(&mm1_m4_SS, &on_mm1_m4_SS);
-  mm1_m4.add_item(&m_SAVE, &on_m_SAVE);
-  mm1_m4.add_item(&m_BACK, &on_m_BACK);
-
-  mm1.add_menu(&mm1_m4);
-
-  mm1_m5.add_item(&mm1_m5_HH, &on_mm1_m5_HH);
-  mm1_m5.add_item(&mm1_m5_MM, &on_mm1_m5_MM);
-  mm1_m5.add_item(&mm1_m5_SS, &on_mm1_m5_SS);
-  mm1_m5.add_item(&m_SAVE, &on_m_SAVE);
-  mm1_m5.add_item(&m_BACK, &on_m_BACK);
-
-  mm1.add_menu(&mm1_m5);
-
-  mm1_m6.add_item(&mm1_m6_DD, &on_mm1_m6_DD);
-  mm1_m6.add_item(&m_SAVE, &on_m_SAVE);
-  mm1_m6.add_item(&m_BACK, &on_m_BACK);
-
-  mm1.add_menu(&mm1_m6);
-
-  mm1.add_item(&m_BACK, &on_m_BACK);
-
+  
   rm.add_menu(&mm1);
 
   mm2_m1.add_item(&mm2_m1_DD, &on_mm2_m1_DD);
@@ -508,14 +491,6 @@ void loop() {
   if (currentMillis - previousMillis > interval) {
     previousMillis = currentMillis;
 
-    /*
-      if (day() != previousDay) {
-      previousDay = day();
-      data.daysRun += 1;
-      EEPROM.put(dataAddr, data);
-      }
-    */
-
     Serial.print("Hour: ");
     Serial.print(hour());
     Serial.print(":");
@@ -531,42 +506,56 @@ void loop() {
 
     if ( data.processRunning ) {
 
-      int intervalStartHour = data.intervalStartHour;
-      int intervalStartMin = data.intervalStartMin;
-      int intervalStartSec = data.intervalStartSec;
+      int morningStartMins = data.morningStartMin;
+      int morningStartHours = data.morningStartHour;
+      int morningStartSecs = data.morningStartSec;
 
-      int intervalStopHour = data.intervalStopHour;
-      int intervalStopMin = data.intervalStopMin;
-      int intervalStopSec = data.intervalStopSec;
+      int morningStopMins = data.morningStopMin;
+      int morningStopHours = data.morningStopHour;
+      int morningStopSecs = data.morningStopSec;
 
-      int startMins = data.startMin; // - (data.daysRun * minsDay);
-      int startHours = data.startHour;
-      int startSecs = data.startSec;
+      int nightStartMins = data.nightStartMin;
+      int nightStartHours = data.nightStartHour;
+      int nightStartSecs = data.nightStartSec;
 
-      int stopMins = data.stopMin; // + (data.daysRun * minsDay);
-      int stopHours = data.stopHour;
-      int stopSecs = data.stopSec;
+      int nightStopMins = data.nightStopMin;
+      int nightStopHours = data.nightStopHour;
+      int nightStopSecs = data.nightStopSec;
 
       int fadeHour = data.fadeHour;
       int fadeMin = data.fadeMin;
       int fadeSec = data.fadeSec;
 
-      if (startMins > 59) {
-        startHours++;
+      if (morningStartMins > 59) {
+        morningStartHours++;
       }
-      if (startHours > 23) {
-        startHours = 0;
-      }
-
-      if (stopMins > 59) {
-        stopHours++;
-      }
-      if (stopHours > 23) {
-        stopHours = 0;
+      if (morningStartHours > 23) {
+        morningStartHours = 0;
       }
 
-      if ((hour() == startHours) and (minute() == startMins) and (second() == startSecs)) {
-        Serial.println("Start Fading");
+      if (morningStopMins > 59) {
+        morningStopHours++;
+      }
+      if (morningStopHours > 23) {
+        morningStopHours = 0;
+      }
+      
+      if (nightStartMins > 59) {
+        nightStartHours++;
+      }
+      if (nightStartHours > 23) {
+        nightStartHours = 0;
+      }
+
+      if (nightStopMins > 59) {
+        nightStopHours++;
+      }
+      if (nightStopHours > 23) {
+        nightStopHours = 0;
+      }
+
+      if ((hour() == morningStartHours) and (minute() == morningStartMins) and (second() == morningStartSecs)) {
+        Serial.println("Start Fading MORNING");
 
         hoursInSecs = data.fadeHour * 3600;
         minutesInSecs = data.fadeMin * 60;
@@ -599,8 +588,8 @@ void loop() {
         }
       }
 
-      if ((hour() == stopHours) and (minute() == stopMins) and (second() == stopSecs)) {
-        Serial.println("Stop Fading");
+      if ((hour() == morningStopHours) and (minute() == morningStopMins) and (second() == morningStopSecs)) {
+        Serial.println("Stop Fading MORNING");
 
         hoursInSecs = data.fadeHour * 3600;
         minutesInSecs = data.fadeMin * 60;
@@ -632,33 +621,73 @@ void loop() {
           analogWrite(PWM_LEDS, 0);
         }
       }
+      if ((hour() == nightStartHours) and (minute() == nightStartMins) and (second() == nightStartSecs)) {
+        Serial.println("Start Fading NIGHT");
 
-      if ((hour() == startHours + fadeHour + intervalStartHour) and (minute() == startMins + fadeMin + intervalStartMin) and (second() == startSecs + fadeSec + intervalStartSec)) {
-        Serial.println("Start fading out");
-
-        hoursInSecs = fadeHour * 3600;
-        minutesInSecs = fadeMin * 60;
-        maxSecs = hoursInSecs + minutesInSecs;
-
-        fade = pwmResolution;
-        fadeDec = (float)pwmResolution / (float)maxSecs;
-
-        startFadingOut = 1;
-      }
-
-      if ((hour() == stopHours - fadeHour - intervalStopHour) and (minute() == stopMins - fadeMin - intervalStopMin) and (second() == stopSecs - fadeSec - intervalStopSec)) {
-        Serial.println("Start fading in");
-
-        hoursInSecs = fadeHour * 3600;
-        minutesInSecs = fadeMin * 60;
+        hoursInSecs = data.fadeHour * 3600;
+        minutesInSecs = data.fadeMin * 60;
         maxSecs = hoursInSecs + minutesInSecs;
 
         fade = 0;
         fadeInc = (float)pwmResolution / (float)maxSecs;
-
         startFadingIn = 1;
+
+        Serial.print("FADE IN TIME :");
+        Serial.print(maxSecs);
+        Serial.print(" steps of ");
+        Serial.println(fadeInc);
       }
 
+      if (startFadingIn) {
+        if (secs < maxSecs) {
+          Serial.print("Fading in: ");
+          Serial.println(fade);
+          analogWrite(PWM_LEDS, fade);
+          fade += fadeInc;
+          secs++;
+        }
+        else {
+          Serial.println("Fading in: 4095");
+          secs = 0;
+          startFadingIn = 0;
+          startFadingOut = 0;
+          analogWrite(PWM_LEDS, 4095);
+        }
+      }
+
+      if ((hour() == nightStopHours) and (minute() == nightStopMins) and (second() == nightStopSecs)) {
+        Serial.println("Stop Fading NIGHT");
+
+        hoursInSecs = data.fadeHour * 3600;
+        minutesInSecs = data.fadeMin * 60;
+        maxSecs = hoursInSecs + minutesInSecs;
+
+        fade = pwmResolution;
+        fadeDec = (float)pwmResolution / (float)maxSecs;
+        startFadingOut = 1;
+
+        Serial.print("FADE OUT TIME :");
+        Serial.print(maxSecs);
+        Serial.print(" steps of ");
+        Serial.println(fadeDec);
+      }
+
+      if (startFadingOut) {
+        if (secs < maxSecs) {
+          Serial.print("Fading out: ");
+          Serial.println(fade);
+          analogWrite(PWM_LEDS, fade);
+          fade -= fadeDec;
+          secs++;
+        }
+        else {
+          Serial.println("Fading out: 0");
+          secs = 0;
+          startFadingOut = 0;
+          startFadingIn = 0;
+          analogWrite(PWM_LEDS, 0);
+        }
+      }
     }
   }
 

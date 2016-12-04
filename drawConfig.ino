@@ -23,46 +23,88 @@
 
 void drawConfig() {
   if (editMenu == 1) {
-    if (edit_mm1_m1_HH) {
+    if (edit_mm1_m1_start_HH) {
       screen->setCursor(5, 2);
       screen->print("  ");
       screen->setCursor(5, 2);
-      screen->print(data.startHour);
+      screen->print(data.morningStartHour);
     }
-    else if (edit_mm1_m1_MM) {
+    else if (edit_mm1_m1_start_MM) {
       screen->setCursor(5, 2);
       screen->print("  ");
       screen->setCursor(5, 2);
-      screen->print(data.startMin);
+      screen->print(data.morningStartMin);
     }
-    else if (edit_mm1_m1_SS) {
+    else if (edit_mm1_m1_start_SS) {
       screen->setCursor(5, 2);
       screen->print("  ");
       screen->setCursor(5, 2);
-      screen->print(data.startSec);
+      screen->print(data.morningStartSec);
     }
   }
   else if (editMenu == 2) {
-    if (edit_mm1_m2_HH) {
+    if (edit_mm1_m1_stop_HH) {
       screen->setCursor(5, 2);
       screen->print("  ");
       screen->setCursor(5, 2);
-      screen->print(data.stopHour);
+      screen->print(data.morningStopHour);
     }
-    else if (edit_mm1_m2_MM) {
+    else if (edit_mm1_m1_stop_MM) {
       screen->setCursor(5, 2);
       screen->print("  ");
       screen->setCursor(5, 2);
-      screen->print(data.stopMin);
+      screen->print(data.morningStopMin);
     }
-    else if (edit_mm1_m2_SS) {
+    else if (edit_mm1_m1_stop_SS) {
       screen->setCursor(5, 2);
       screen->print("  ");
       screen->setCursor(5, 2);
-      screen->print(data.stopSec);
+      screen->print(data.morningStopSec);
     }
   }
+
   else if (editMenu == 3) {
+    if (edit_mm1_m2_start_HH) {
+      screen->setCursor(5, 2);
+      screen->print("  ");
+      screen->setCursor(5, 2);
+      screen->print(data.nightStartHour);
+    }
+    else if (edit_mm1_m2_start_MM) {
+      screen->setCursor(5, 2);
+      screen->print("  ");
+      screen->setCursor(5, 2);
+      screen->print(data.nightStartMin);
+    }
+    else if (edit_mm1_m2_start_SS) {
+      screen->setCursor(5, 2);
+      screen->print("  ");
+      screen->setCursor(5, 2);
+      screen->print(data.nightStartSec);
+    }
+  }
+  else if (editMenu == 2) {
+    if (edit_mm1_m2_stop_HH) {
+      screen->setCursor(5, 2);
+      screen->print("  ");
+      screen->setCursor(5, 2);
+      screen->print(data.nightStopHour);
+    }
+    else if (edit_mm1_m2_stop_MM) {
+      screen->setCursor(5, 2);
+      screen->print("  ");
+      screen->setCursor(5, 2);
+      screen->print(data.nightStopMin);
+    }
+    else if (edit_mm1_m2_stop_SS) {
+      screen->setCursor(5, 2);
+      screen->print("  ");
+      screen->setCursor(5, 2);
+      screen->print(data.nightStopSec);
+    }
+  }
+  
+  else if (editMenu == 5) {
     if (edit_mm1_m3_HH) {
       screen->setCursor(5, 2);
       screen->print("  ");
@@ -80,54 +122,6 @@ void drawConfig() {
       screen->print("  ");
       screen->setCursor(5, 2);
       screen->print(data.fadeSec);
-    }
-  }
-  else if (editMenu == 4) {
-    if (edit_mm1_m4_HH) {
-      screen->setCursor(5, 2);
-      screen->print("  ");
-      screen->setCursor(5, 2);
-      screen->print(data.intervalStartHour);
-    }
-    else if (edit_mm1_m4_MM) {
-      screen->setCursor(5, 2);
-      screen->print("  ");
-      screen->setCursor(5, 2);
-      screen->print(data.intervalStartMin);
-    }
-    else if (edit_mm1_m4_SS) {
-      screen->setCursor(5, 2);
-      screen->print("  ");
-      screen->setCursor(5, 2);
-      screen->print(data.intervalStartSec);
-    }
-  }
-  else if (editMenu == 5) {
-    if (edit_mm1_m5_HH) {
-      screen->setCursor(5, 2);
-      screen->print("  ");
-      screen->setCursor(5, 2);
-      screen->print(data.intervalStopHour);
-    }
-    else if (edit_mm1_m5_MM) {
-      screen->setCursor(5, 2);
-      screen->print("  ");
-      screen->setCursor(5, 2);
-      screen->print(data.intervalStopMin);
-    }
-    else if (edit_mm1_m5_SS) {
-      screen->setCursor(5, 2);
-      screen->print("  ");
-      screen->setCursor(5, 2);
-      screen->print(data.intervalStopSec);
-    }
-  }
-  else if (editMenu == 6) {
-    if (edit_mm1_m6_DD) {
-      screen->setCursor(5, 2);
-      screen->print("  ");
-      screen->setCursor(5, 2);
-      screen->print(data.daysMax);
     }
   }
   else if (editMenu == 7) {

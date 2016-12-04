@@ -23,65 +23,124 @@
 
 // Menu callback functions
 
-// Main menu 1 Menu 1
-void on_mm1_m1_HH(MenuItem* p_menu_item) {
+// Main menu 1 Menu 1 start
+void on_mm1_m1_start_HH(MenuItem* p_menu_item) {
 
   drawSetup = true;
   editMenu = 1;
 
-  edit_mm1_m1_HH = true;
-  edit_mm1_m1_MM = false;
-  edit_mm1_m1_SS = false;
+  edit_mm1_m1_start_HH = true;
+  edit_mm1_m1_start_MM = false;
+  edit_mm1_m1_start_SS = false;
 }
-void on_mm1_m1_MM(MenuItem* p_menu_item) {
+void on_mm1_m1_start_MM(MenuItem* p_menu_item) {
 
   drawSetup = true;
   editMenu = 1;
 
-  edit_mm1_m1_HH = false;
-  edit_mm1_m1_MM = true;
-  edit_mm1_m1_SS = false;
+  edit_mm1_m1_start_HH = false;
+  edit_mm1_m1_start_MM = true;
+  edit_mm1_m1_start_SS = false;
 }
-void on_mm1_m1_SS(MenuItem* p_menu_item) {
+void on_mm1_m1_start_SS(MenuItem* p_menu_item) {
 
   drawSetup = true;
   editMenu = 1;
 
-  edit_mm1_m1_HH = false;
-  edit_mm1_m1_MM = false;
-  edit_mm1_m1_SS = true;
+  edit_mm1_m1_start_HH = false;
+  edit_mm1_m1_start_MM = false;
+  edit_mm1_m1_start_SS = true;
 
 }
 
-// Main menu 1 Menu 2
-void on_mm1_m2_HH(MenuItem* p_menu_item) {
+// Main menu 1 Menu 1 stop
+void on_mm1_m1_stop_HH(MenuItem* p_menu_item) {
 
   drawSetup = true;
   editMenu = 2;
 
-  edit_mm1_m2_HH = true;
-  edit_mm1_m2_MM = false;
-  edit_mm1_m2_SS = false;
-
+  edit_mm1_m1_stop_HH = true;
+  edit_mm1_m1_stop_MM = false;
+  edit_mm1_m1_stop_SS = false;
 }
-void on_mm1_m2_MM(MenuItem* p_menu_item) {
+void on_mm1_m1_stop_MM(MenuItem* p_menu_item) {
 
   drawSetup = true;
   editMenu = 2;
 
-  edit_mm1_m2_HH = false;
-  edit_mm1_m2_MM = true;
-  edit_mm1_m2_SS = false;
-
+  edit_mm1_m1_stop_HH = false;
+  edit_mm1_m1_stop_MM = true;
+  edit_mm1_m1_stop_SS = false;
 }
-void on_mm1_m2_SS(MenuItem* p_menu_item) {
+void on_mm1_m1_stop_SS(MenuItem* p_menu_item) {
 
   drawSetup = true;
   editMenu = 2;
 
-  edit_mm1_m2_HH = false;
-  edit_mm1_m2_MM = false;
-  edit_mm1_m2_SS = true;
+  edit_mm1_m1_stop_HH = false;
+  edit_mm1_m1_stop_MM = false;
+  edit_mm1_m1_stop_SS = true;
+
+}
+
+
+// Main menu 1 Menu 2 start
+void on_mm1_m2_start_HH(MenuItem* p_menu_item) {
+
+  drawSetup = true;
+  editMenu = 3;
+
+  edit_mm1_m2_start_HH = true;
+  edit_mm1_m2_start_MM = false;
+  edit_mm1_m2_start_SS = false;
+}
+void on_mm1_m2_start_MM(MenuItem* p_menu_item) {
+
+  drawSetup = true;
+  editMenu = 3;
+
+  edit_mm1_m2_start_HH = false;
+  edit_mm1_m2_start_MM = true;
+  edit_mm1_m2_start_SS = false;
+}
+void on_mm1_m2_start_SS(MenuItem* p_menu_item) {
+
+  drawSetup = true;
+  editMenu = 3;
+
+  edit_mm1_m2_start_HH = false;
+  edit_mm1_m2_start_MM = false;
+  edit_mm1_m2_start_SS = true;
+
+}
+
+// Main menu 1 Menu 2 stop
+void on_mm1_m2_stop_HH(MenuItem* p_menu_item) {
+
+  drawSetup = true;
+  editMenu = 4;
+
+  edit_mm1_m2_stop_HH = true;
+  edit_mm1_m2_stop_MM = false;
+  edit_mm1_m2_stop_SS = false;
+}
+void on_mm1_m2_stop_MM(MenuItem* p_menu_item) {
+
+  drawSetup = true;
+  editMenu = 4;
+
+  edit_mm1_m2_stop_HH = false;
+  edit_mm1_m2_stop_MM = true;
+  edit_mm1_m2_stop_SS = false;
+}
+void on_mm1_m2_stop_SS(MenuItem* p_menu_item) {
+
+  drawSetup = true;
+  editMenu = 4;
+
+  edit_mm1_m2_stop_HH = false;
+  edit_mm1_m2_stop_MM = false;
+  edit_mm1_m2_stop_SS = true;
 
 }
 
@@ -89,7 +148,7 @@ void on_mm1_m2_SS(MenuItem* p_menu_item) {
 void on_mm1_m3_HH(MenuItem* p_menu_item) {
 
   drawSetup = true;
-  editMenu = 3;
+  editMenu = 5;
 
   edit_mm1_m3_HH = true;
   edit_mm1_m3_MM = false;
@@ -99,7 +158,7 @@ void on_mm1_m3_HH(MenuItem* p_menu_item) {
 void on_mm1_m3_MM(MenuItem* p_menu_item) {
 
   drawSetup = true;
-  editMenu = 3;
+  editMenu = 5;
 
   edit_mm1_m3_HH = false;
   edit_mm1_m3_MM = true;
@@ -109,85 +168,11 @@ void on_mm1_m3_MM(MenuItem* p_menu_item) {
 void on_mm1_m3_SS(MenuItem* p_menu_item) {
 
   drawSetup = true;
-  editMenu = 3;
+  editMenu = 5;
 
   edit_mm1_m3_HH = false;
   edit_mm1_m3_MM = false;
   edit_mm1_m3_SS = true;
-
-}
-
-// Main menu 1 Menu 4
-void on_mm1_m4_HH(MenuItem* p_menu_item) {
-
-  drawSetup = true;
-  editMenu = 4;
-
-  edit_mm1_m4_HH = true;
-  edit_mm1_m4_MM = false;
-  edit_mm1_m4_SS = false;
-
-}
-void on_mm1_m4_MM(MenuItem* p_menu_item) {
-
-  drawSetup = true;
-  editMenu = 4;
-
-  edit_mm1_m4_HH = false;
-  edit_mm1_m4_MM = true;
-  edit_mm1_m4_SS = false;
-
-}
-void on_mm1_m4_SS(MenuItem* p_menu_item) {
-
-  drawSetup = true;
-  editMenu = 4;
-
-  edit_mm1_m4_HH = false;
-  edit_mm1_m4_MM = false;
-  edit_mm1_m4_SS = true;
-
-}
-
-// Main menu 1 Menu 5
-void on_mm1_m5_HH(MenuItem* p_menu_item) {
-
-  drawSetup = true;
-  editMenu = 5;
-
-  edit_mm1_m5_HH = true;
-  edit_mm1_m5_MM = false;
-  edit_mm1_m5_SS = false;
-
-}
-void on_mm1_m5_MM(MenuItem* p_menu_item) {
-
-  drawSetup = true;
-  editMenu = 5;
-
-  edit_mm1_m5_HH = false;
-  edit_mm1_m5_MM = true;
-  edit_mm1_m5_SS = false;
-
-}
-void on_mm1_m5_SS(MenuItem* p_menu_item) {
-
-  drawSetup = true;
-  editMenu = 5;
-
-  edit_mm1_m5_HH = false;
-  edit_mm1_m5_MM = false;
-  edit_mm1_m5_SS = true;
-
-}
-
-// Main menu 1 Menu 6
-void on_mm1_m6_DD(MenuItem* p_menu_item) {
-
-  drawSetup = true;
-  editMenu = 6;
-
-  edit_mm1_m6_DD = true;
 
 }
 

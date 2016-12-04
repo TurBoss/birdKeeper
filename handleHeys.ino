@@ -38,7 +38,7 @@ void handleKeys() {
   else if (down.fell()) {
     keyPressed = 's';
   }
-  else if ( left.fell()) {
+  else if (left.fell()) {
     keyPressed = 'a';
   }
   else if (right.fell()) {

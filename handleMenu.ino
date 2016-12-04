@@ -29,88 +29,170 @@ void handleMenu(char keyPressed) {
 
       // Start fade in
 
-      if ( edit_mm1_m1_HH ) {
-        if ( data.startHour < 24 ) {
-          data.startHour += 1;
-          if ( data.startHour == 24 ) {
-            data.startHour = 0;
+      if ( edit_mm1_m1_start_HH ) {
+        if ( data.morningStartHour < 24 ) {
+          data.morningStartHour += 1;
+          if ( data.morningStartHour == 24 ) {
+            data.morningStartHour = 0;
           }
 
           screen->setCursor(5, 2);
           screen->print("  ");
           screen->setCursor(5, 2);
-          screen->print(data.startHour);
+          screen->print(data.morningStartHour);
         }
       }
-      else if ( edit_mm1_m1_MM ) {
-        if ( data.startMin < 60 ) {
-          data.startMin += 1;
-          if ( data.startMin == 60 ) {
-            data.startMin = 0;
+      else if ( edit_mm1_m1_start_MM ) {
+        if ( data.morningStartMin < 60 ) {
+          data.morningStartMin += 1;
+          if ( data.morningStartMin == 60 ) {
+            data.morningStartMin = 0;
           }
 
           screen->setCursor(5, 2);
           screen->print("  ");
           screen->setCursor(5, 2);
-          screen->print(data.startMin);
+          screen->print(data.morningStartMin);
         }
       }
-      else if ( edit_mm1_m1_SS ) {
-        if ( data.startSec < 60 ) {
-          data.startSec += 1;
-          if ( data.startSec == 60 ) {
-            data.startSec = 0;
+      else if ( edit_mm1_m1_start_SS ) {
+        if ( data.morningStartSec < 60 ) {
+          data.morningStartSec += 1;
+          if ( data.morningStartSec == 60 ) {
+            data.morningStartSec = 0;
           }
 
           screen->setCursor(5, 2);
           screen->print("  ");
           screen->setCursor(5, 2);
-          screen->print(data.startSec);
+          screen->print(data.morningStartSec);
         }
       }
 
       // Stop fade in
 
-      else if ( edit_mm1_m2_HH ) {
-        if ( data.stopHour < 24 ) {
-          data.stopHour += 1;
-          if ( data.stopHour == 24 ) {
-            data.stopHour = 0;
+      else if ( edit_mm1_m1_stop_HH ) {
+        if ( data.morningStopHour < 24 ) {
+          data.morningStopHour += 1;
+          if ( data.morningStopHour == 24 ) {
+            data.morningStopHour = 0;
           }
 
           screen->setCursor(5, 2);
           screen->print("  ");
           screen->setCursor(5, 2);
-          screen->print(data.stopHour);
+          screen->print(data.morningStopHour);
         }
       }
-      else if ( edit_mm1_m2_MM ) {
-        if ( data.stopMin < 60 ) {
-          data.stopMin += 1;
-          if ( data.stopMin == 60 ) {
-            data.stopMin = 0;
+      else if ( edit_mm1_m1_stop_MM ) {
+        if ( data.morningStopMin < 60 ) {
+          data.morningStopMin += 1;
+          if ( data.morningStopMin == 60 ) {
+            data.morningStopMin = 0;
           }
 
           screen->setCursor(5, 2);
           screen->print("  ");
           screen->setCursor(5, 2);
-          screen->print(data.stopMin);
+          screen->print(data.morningStopMin);
         }
       }
-      else if ( edit_mm1_m2_SS ) {
-        if ( data.stopSec < 60 ) {
-          data.stopSec += 1;
-          if ( data.stopSec == 60 ) {
-            data.stopSec = 0;
+      else if ( edit_mm1_m1_stop_SS ) {
+        if ( data.morningStopSec < 60 ) {
+          data.morningStopSec += 1;
+          if ( data.morningStopSec == 60 ) {
+            data.morningStopSec = 0;
           }
 
           screen->setCursor(5, 2);
           screen->print("  ");
           screen->setCursor(5, 2);
-          screen->print(data.stopSec);
+          screen->print(data.morningStopSec);
         }
       }
 
+      else if ( edit_mm1_m2_start_HH ) {
+        if ( data.nightStartHour < 24 ) {
+          data.nightStartHour += 1;
+          if ( data.nightStartHour == 24 ) {
+            data.nightStartHour = 0;
+          }
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(data.nightStartHour);
+        }
+      }
+      else if ( edit_mm1_m2_start_MM ) {
+        if ( data.nightStartMin < 60 ) {
+          data.nightStartMin += 1;
+          if ( data.nightStartMin == 60 ) {
+            data.nightStartMin = 0;
+          }
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(data.nightStartMin);
+        }
+      }
+      else if ( edit_mm1_m2_start_SS ) {
+        if ( data.nightStartSec < 60 ) {
+          data.nightStartSec += 1;
+          if ( data.nightStartSec == 60 ) {
+            data.nightStartSec = 0;
+          }
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(data.nightStartSec);
+        }
+      }
+
+      // Stop fade in
+
+      else if ( edit_mm1_m2_stop_HH ) {
+        if ( data.nightStopHour < 24 ) {
+          data.nightStopHour += 1;
+          if ( data.nightStopHour == 24 ) {
+            data.nightStopHour = 0;
+          }
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(data.nightStopHour);
+        }
+      }
+      else if ( edit_mm1_m2_stop_MM ) {
+        if ( data.nightStopMin < 60 ) {
+          data.nightStopMin += 1;
+          if ( data.nightStopMin == 60 ) {
+            data.nightStopMin = 0;
+          }
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(data.nightStopMin);
+        }
+      }
+      else if ( edit_mm1_m2_stop_SS ) {
+        if ( data.nightStopSec < 60 ) {
+          data.nightStopSec += 1;
+          if ( data.nightStopSec == 60 ) {
+            data.nightStopSec = 0;
+          }
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(data.nightStopSec);
+        }
+      }
+      
       // Fade duration setup
 
       else if ( edit_mm1_m3_HH ) {
@@ -150,106 +232,6 @@ void handleMenu(char keyPressed) {
           screen->print("  ");
           screen->setCursor(5, 2);
           screen->print(data.fadeSec);
-        }
-      }
-
-      // Start Interval
-
-      else if ( edit_mm1_m4_HH ) {
-        if ( data.intervalStartHour < 24 ) {
-          data.intervalStartHour += 1;
-          if ( data.intervalStartHour == 24 ) {
-            data.intervalStartHour = 0;
-          }
-
-          screen->setCursor(5, 2);
-          screen->print("  ");
-          screen->setCursor(5, 2);
-          screen->print(data.intervalStartHour);
-        }
-      }
-      else if ( edit_mm1_m4_MM ) {
-        if ( data.intervalStartMin < 60 ) {
-          data.intervalStartMin += 1;
-          if ( data.intervalStartMin == 60 ) {
-            data.intervalStartMin = 0;
-          }
-
-          screen->setCursor(5, 2);
-          screen->print("  ");
-          screen->setCursor(5, 2);
-          screen->print(data.intervalStartMin);
-        }
-      }
-      else if ( edit_mm1_m4_SS ) {
-        if ( data.intervalStartSec < 60 ) {
-          data.intervalStartSec += 1;
-          if ( data.intervalStartSec == 60 ) {
-            data.intervalStartSec = 0;
-          }
-
-          screen->setCursor(5, 2);
-          screen->print("  ");
-          screen->setCursor(5, 2);
-          screen->print(data.intervalStartSec);
-        }
-      }
-
-      // End Interval
-
-      else if ( edit_mm1_m5_HH ) {
-        if ( data.intervalStopHour < 24 ) {
-          data.intervalStopHour += 1;
-          if ( data.intervalStopHour == 24 ) {
-            data.intervalStopHour = 0;
-          }
-
-          screen->setCursor(5, 2);
-          screen->print("  ");
-          screen->setCursor(5, 2);
-          screen->print(data.intervalStopHour);
-        }
-      }
-      else if ( edit_mm1_m5_MM ) {
-        if ( data.intervalStopMin < 60 ) {
-          data.intervalStopMin += 1;
-          if ( data.intervalStopMin == 60 ) {
-            data.intervalStopMin = 0;
-          }
-
-          screen->setCursor(5, 2);
-          screen->print("  ");
-          screen->setCursor(5, 2);
-          screen->print(data.intervalStopMin);
-        }
-      }
-      else if ( edit_mm1_m5_SS ) {
-        if ( data.intervalStopSec < 60 ) {
-          data.intervalStopSec += 1;
-          if ( data.intervalStopSec == 60 ) {
-            data.intervalStopSec = 0;
-          }
-
-          screen->setCursor(5, 2);
-          screen->print("  ");
-          screen->setCursor(5, 2);
-          screen->print(data.intervalStopSec);
-        }
-      }
-
-      // Setup days duration
-
-      else if ( edit_mm1_m6_DD ) {
-        if ( data.daysMax < 1025 ) {
-          data.daysMax += 1;
-          if ( data.daysMax == 1025 ) {
-            data.daysMax = 0;
-          }
-
-          screen->setCursor(5, 2);
-          screen->print("  ");
-          screen->setCursor(5, 2);
-          screen->print(data.daysMax);
         }
       }
 
@@ -362,85 +344,167 @@ void handleMenu(char keyPressed) {
 
       // Start setup
 
-      if ( edit_mm1_m1_HH ) {
-        if ( data.startHour > -1 ) {
-          data.startHour -= 1;
-          if ( data.startHour == -1 ) {
-            data.startHour = 23;
+      if ( edit_mm1_m1_start_HH ) {
+        if ( data.morningStartHour > -1 ) {
+          data.morningStartHour -= 1;
+          if ( data.morningStartHour == -1 ) {
+            data.morningStartHour = 23;
           }
 
           screen->setCursor(5, 2);
           screen->print("  ");
           screen->setCursor(5, 2);
-          screen->print(data.startHour);
+          screen->print(data.morningStartHour);
         }
       }
-      else if ( edit_mm1_m1_MM ) {
-        if ( data.startMin > -1 ) {
-          data.startMin -= 1;
-          if ( data.startMin == -1 ) {
-            data.startMin = 59;
+      else if ( edit_mm1_m1_start_MM ) {
+        if ( data.morningStartMin > -1 ) {
+          data.morningStartMin -= 1;
+          if ( data.morningStartMin == -1 ) {
+            data.morningStartMin = 59;
           }
 
           screen->setCursor(5, 2);
           screen->print("  ");
           screen->setCursor(5, 2);
-          screen->print(data.startMin);
+          screen->print(data.morningStartMin);
         }
       }
-      else if ( edit_mm1_m1_SS ) {
-        if ( data.startSec > -1 ) {
-          data.startSec -= 1;
-          if ( data.startSec == -1 ) {
-            data.startSec = 59;
+      else if ( edit_mm1_m1_start_SS ) {
+        if ( data.morningStartSec > -1 ) {
+          data.morningStartSec -= 1;
+          if ( data.morningStartSec == -1 ) {
+            data.morningStartSec = 59;
           }
 
           screen->setCursor(5, 2);
           screen->print("  ");
           screen->setCursor(5, 2);
-          screen->print(data.startSec);
+          screen->print(data.morningStartSec);
         }
       }
 
       // Stop setup
 
-      else if ( edit_mm1_m2_HH ) {
-        if ( data.stopHour > -1 ) {
-          data.stopHour -= 1;
-          if ( data.stopHour == -1 ) {
-            data.stopHour = 23;
+      else if ( edit_mm1_m1_stop_HH ) {
+        if ( data.morningStopHour > -1 ) {
+          data.morningStopHour -= 1;
+          if ( data.morningStopHour == -1 ) {
+            data.morningStopHour = 23;
           }
 
           screen->setCursor(5, 2);
           screen->print("  ");
           screen->setCursor(5, 2);
-          screen->print(data.stopHour);
+          screen->print(data.morningStopHour);
         }
       }
-      else if ( edit_mm1_m2_MM ) {
-        if ( data.stopMin > -1 ) {
-          data.stopMin -= 1;
-          if ( data.stopMin == -1 ) {
-            data.stopMin = 59;
+      else if ( edit_mm1_m1_stop_MM ) {
+        if ( data.morningStopMin > -1 ) {
+          data.morningStopMin -= 1;
+          if ( data.morningStopMin == -1 ) {
+            data.morningStopMin = 59;
           }
 
           screen->setCursor(5, 2);
           screen->print("  ");
           screen->setCursor(5, 2);
-          screen->print(data.stopMin);
+          screen->print(data.morningStopMin);
         }
       }
-      else if ( edit_mm1_m2_SS ) {
-        if ( data.stopSec > -1 ) {
-          data.stopSec -= 1;
-          if ( data.stopSec == -1 ) {
-            data.stopSec = 59;
+      else if ( edit_mm1_m1_stop_SS ) {
+        if ( data.morningStopSec > -1 ) {
+          data.morningStopSec -= 1;
+          if ( data.morningStopSec == -1 ) {
+            data.morningStopSec = 59;
           }
 
           screen->setCursor(5, 2);
           screen->print("  ");
           screen->setCursor(5, 2);
-          screen->print(data.stopSec);
+          screen->print(data.morningStopSec);
+        }
+      }
+
+      else if ( edit_mm1_m2_start_HH ) {
+        if ( data.nightStartHour > -1 ) {
+          data.nightStartHour -= 1;
+          if ( data.nightStartHour == -1 ) {
+            data.nightStartHour = 23;
+          }
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(data.nightStartHour);
+        }
+      }
+      else if ( edit_mm1_m2_start_MM ) {
+        if ( data.nightStartMin > -1 ) {
+          data.nightStartMin -= 1;
+          if ( data.nightStartMin == -1 ) {
+            data.nightStartMin = 59;
+          }
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(data.nightStartMin);
+        }
+      }
+      else if ( edit_mm1_m2_start_SS ) {
+        if ( data.nightStartSec > -1 ) {
+          data.nightStartSec -= 1;
+          if ( data.nightStartSec == -1 ) {
+            data.nightStartSec = 59;
+          }
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(data.nightStartSec);
+        }
+      }
+
+      // Stop setup
+
+      else if ( edit_mm1_m2_stop_HH ) {
+        if ( data.nightStopHour > -1 ) {
+          data.nightStopHour -= 1;
+          if ( data.nightStopHour == -1 ) {
+            data.nightStopHour = 23;
+          }
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(data.nightStopHour);
+        }
+      }
+      else if ( edit_mm1_m2_stop_MM ) {
+        if ( data.nightStopMin > -1 ) {
+          data.nightStopMin -= 1;
+          if ( data.nightStopMin == -1 ) {
+            data.nightStopMin = 59;
+          }
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(data.nightStopMin);
+        }
+      }
+      else if ( edit_mm1_m2_stop_SS ) {
+        if ( data.nightStopSec > -1 ) {
+          data.nightStopSec -= 1;
+          if ( data.nightStopSec == -1 ) {
+            data.nightStopSec = 59;
+          }
+
+          screen->setCursor(5, 2);
+          screen->print("  ");
+          screen->setCursor(5, 2);
+          screen->print(data.nightStopSec);
         }
       }
 
@@ -483,106 +547,6 @@ void handleMenu(char keyPressed) {
           screen->print("  ");
           screen->setCursor(5, 2);
           screen->print(data.fadeSec);
-        }
-      }
-
-      // Interval duration start
-
-      else if ( edit_mm1_m4_HH ) {
-        if ( data.intervalStartHour > -1 ) {
-          data.intervalStartHour -= 1;
-          if ( data.intervalStartHour == -1 ) {
-            data.intervalStartHour = 23;
-          }
-
-          screen->setCursor(5, 2);
-          screen->print("  ");
-          screen->setCursor(5, 2);
-          screen->print(data.intervalStartHour);
-        }
-      }
-      else if ( edit_mm1_m4_MM ) {
-        if ( data.intervalStartMin > -1 ) {
-          data.intervalStartMin -= 1;
-          if ( data.intervalStartMin == -1 ) {
-            data.intervalStartMin = 59;
-          }
-
-          screen->setCursor(5, 2);
-          screen->print("  ");
-          screen->setCursor(5, 2);
-          screen->print(data.intervalStartMin);
-        }
-      }
-      else if ( edit_mm1_m4_SS ) {
-        if ( data.intervalStartSec > -1 ) {
-          data.intervalStartSec -= 1;
-          if ( data.intervalStartSec == -1 ) {
-            data.intervalStartSec = 59;
-          }
-
-          screen->setCursor(5, 2);
-          screen->print("  ");
-          screen->setCursor(5, 2);
-          screen->print(data.intervalStartSec);
-        }
-      }
-
-      // Interval duration stop
-
-      else if ( edit_mm1_m5_HH ) {
-        if ( data.intervalStopHour > -1 ) {
-          data.intervalStopHour -= 1;
-          if ( data.intervalStopHour == -1 ) {
-            data.intervalStopHour = 23;
-          }
-
-          screen->setCursor(5, 2);
-          screen->print("  ");
-          screen->setCursor(5, 2);
-          screen->print(data.intervalStopHour);
-        }
-      }
-      else if ( edit_mm1_m5_MM ) {
-        if ( data.intervalStopMin > -1 ) {
-          data.intervalStopMin -= 1;
-          if ( data.intervalStopMin == -1 ) {
-            data.intervalStopMin = 59;
-          }
-
-          screen->setCursor(5, 2);
-          screen->print("  ");
-          screen->setCursor(5, 2);
-          screen->print(data.intervalStopMin);
-        }
-      }
-      else if ( edit_mm1_m5_SS ) {
-        if ( data.intervalStopSec > -1 ) {
-          data.intervalStopSec -= 1;
-          if ( data.intervalStopSec == -1 ) {
-            data.intervalStopSec = 59;
-          }
-
-          screen->setCursor(5, 2);
-          screen->print("  ");
-          screen->setCursor(5, 2);
-          screen->print(data.intervalStopSec);
-        }
-      }
-
-      // Setup days duration
-
-      else if ( edit_mm1_m6_DD ) {
-        if ( data.daysMax > -1 ) {
-          data.daysMax -= 1;
-          if ( data.daysMax == -1 ) {
-            data.daysMax = 1024;
-          }
-
-          screen->setCursor(5, 2);
-          screen->print("  ");
-          screen->setCursor(5, 2);
-          screen->print(data.daysMax);
         }
       }
 
@@ -692,23 +656,41 @@ void handleMenu(char keyPressed) {
       break;
 
     case 'a': // Back presed
-      if (edit_mm1_m1_HH) {
-        edit_mm1_m1_HH = false;
+      if (edit_mm1_m1_start_HH) {
+        edit_mm1_m1_start_HH = false;
       }
-      else if (edit_mm1_m1_MM) {
-        edit_mm1_m1_MM = false;
+      else if (edit_mm1_m1_start_MM) {
+        edit_mm1_m1_start_MM = false;
       }
-      else if (edit_mm1_m1_SS) {
-        edit_mm1_m1_SS = false;
+      else if (edit_mm1_m1_start_SS) {
+        edit_mm1_m1_start_SS = false;
       }
-      else if (edit_mm1_m2_HH) {
-        edit_mm1_m2_HH = false;
+      else if (edit_mm1_m1_stop_HH) {
+        edit_mm1_m1_stop_HH = false;
       }
-      else if (edit_mm1_m2_MM) {
-        edit_mm1_m2_MM = false;
+      else if (edit_mm1_m1_stop_MM) {
+        edit_mm1_m1_stop_MM = false;
       }
-      else if (edit_mm1_m2_SS) {
-        edit_mm1_m2_SS = false;
+      else if (edit_mm1_m1_stop_SS) {
+        edit_mm1_m1_stop_SS = false;
+      }
+      else if (edit_mm1_m2_start_HH) {
+        edit_mm1_m2_start_HH = false;
+      }
+      else if (edit_mm1_m2_start_MM) {
+        edit_mm1_m2_start_MM = false;
+      }
+      else if (edit_mm1_m2_start_SS) {
+        edit_mm1_m2_start_SS = false;
+      }
+      else if (edit_mm1_m2_stop_HH) {
+        edit_mm1_m2_stop_HH = false;
+      }
+      else if (edit_mm1_m2_stop_MM) {
+        edit_mm1_m2_stop_MM = false;
+      }
+      else if (edit_mm1_m2_stop_SS) {
+        edit_mm1_m2_stop_SS = false;
       }
       else if (edit_mm1_m3_HH) {
         edit_mm1_m3_HH = false;
@@ -718,27 +700,6 @@ void handleMenu(char keyPressed) {
       }
       else if (edit_mm1_m3_SS) {
         edit_mm1_m3_SS = false;
-      }
-      else if (edit_mm1_m4_HH) {
-        edit_mm1_m4_HH = false;
-      }
-      else if (edit_mm1_m4_MM) {
-        edit_mm1_m4_MM = false;
-      }
-      else if (edit_mm1_m4_SS) {
-        edit_mm1_m4_SS = false;
-      }
-      else if (edit_mm1_m5_HH) {
-        edit_mm1_m5_HH = false;
-      }
-      else if (edit_mm1_m5_MM) {
-        edit_mm1_m5_MM = false;
-      }
-      else if (edit_mm1_m5_SS) {
-        edit_mm1_m5_SS = false;
-      }
-      else if (edit_mm1_m6_DD) {
-        edit_mm1_m6_DD = false;
       }
       else if (edit_mm2_m1_DD) {
         edit_mm2_m1_DD = false;
@@ -777,39 +738,33 @@ void handleMenu(char keyPressed) {
 
       Serial.println("Report:");
 
+      Serial.print("Start Hour morning: ");
+      Serial.print(data.morningStartHour);
+      Serial.print(":");
+      Serial.print(data.morningStartMin);
+      Serial.print(":");
+      Serial.println(data.morningStartSec);
 
-      Serial.print("Days Max : ");
-      Serial.println(data.daysMax);
-      Serial.print("Days Run : ");
-      Serial.println(data.daysRun);
+      Serial.print("Stop Hour morning: ");
+      Serial.print(data.morningStopHour);
+      Serial.print(":");
+      Serial.print(data.morningStopMin);
+      Serial.print(":");
+      Serial.println(data.morningStopSec);
+      
+      Serial.print("Start Hour night: ");
+      Serial.print(data.nightStartHour);
+      Serial.print(":");
+      Serial.print(data.nightStartMin);
+      Serial.print(":");
+      Serial.println(data.nightStartSec);
 
-      Serial.print("Start Hour : ");
-      Serial.print(data.startHour);
+      Serial.print("Stop Hour night: ");
+      Serial.print(data.nightStopHour);
       Serial.print(":");
-      Serial.print(data.startMin);
+      Serial.print(data.nightStopMin);
       Serial.print(":");
-      Serial.println(data.startSec);
-
-      Serial.print("Stop Hour : ");
-      Serial.print(data.stopHour);
-      Serial.print(":");
-      Serial.print(data.stopMin);
-      Serial.print(":");
-      Serial.println(data.stopSec);
-
-      Serial.print("Interval Start: ");
-      Serial.print(data.intervalStartHour);
-      Serial.print(":");
-      Serial.print(data.intervalStartMin);
-      Serial.print(":");
-      Serial.println(data.intervalStartSec);
-
-      Serial.print("Interval End: ");
-      Serial.print(data.intervalStopHour);
-      Serial.print(":");
-      Serial.print(data.intervalStopMin);
-      Serial.print(":");
-      Serial.println(data.intervalStopSec);
+      Serial.println(data.nightStopSec);
 
       Serial.print("Fade Time : ");
       Serial.print(data.fadeHour);

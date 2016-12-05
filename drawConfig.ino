@@ -83,7 +83,7 @@ void drawConfig() {
       screen->print(data.nightStartSec);
     }
   }
-  else if (editMenu == 2) {
+  else if (editMenu == 4) {
     if (edit_mm1_m2_stop_HH) {
       screen->setCursor(5, 2);
       screen->print("  ");

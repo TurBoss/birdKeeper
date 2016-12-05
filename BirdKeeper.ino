@@ -61,8 +61,11 @@ bool configured = false;
 
 int processRuning = 0;
 
-int startFadingIn = 0;
-int startFadingOut = 0;
+int startFadingInMorning = 0;
+int startFadingOutMorning = 0;
+
+int startFadingInNight = 0;
+int startFadingOutNight = 0;
 
 unsigned long previousMillis = 0;
 unsigned long interval = 1000;
@@ -359,9 +362,9 @@ void setup() {
   
   mm1.add_menu(&mm1_m1);
 
-  mm1_m2_start.add_item(&mm1_m1_start_HH, &on_mm1_m1_start_HH);
-  mm1_m2_start.add_item(&mm1_m1_start_MM, &on_mm1_m1_start_MM);
-  mm1_m2_start.add_item(&mm1_m1_start_SS, &on_mm1_m1_start_SS);
+  mm1_m2_start.add_item(&mm1_m2_start_HH, &on_mm1_m2_start_HH);
+  mm1_m2_start.add_item(&mm1_m2_start_MM, &on_mm1_m2_start_MM);
+  mm1_m2_start.add_item(&mm1_m2_start_SS, &on_mm1_m2_start_SS);
   mm1_m2_start.add_item(&m_SAVE, &on_m_SAVE);
   mm1_m2_start.add_item(&m_BACK, &on_m_BACK);
   
@@ -506,25 +509,21 @@ void loop() {
 
     if ( data.processRunning ) {
 
-      int morningStartMins = data.morningStartMin;
       int morningStartHours = data.morningStartHour;
+      int morningStartMins = data.morningStartMin;
       int morningStartSecs = data.morningStartSec;
 
-      int morningStopMins = data.morningStopMin;
       int morningStopHours = data.morningStopHour;
+      int morningStopMins = data.morningStopMin;
       int morningStopSecs = data.morningStopSec;
 
-      int nightStartMins = data.nightStartMin;
       int nightStartHours = data.nightStartHour;
+      int nightStartMins = data.nightStartMin;
       int nightStartSecs = data.nightStartSec;
 
-      int nightStopMins = data.nightStopMin;
       int nightStopHours = data.nightStopHour;
+      int nightStopMins = data.nightStopMin;
       int nightStopSecs = data.nightStopSec;
-
-      int fadeHour = data.fadeHour;
-      int fadeMin = data.fadeMin;
-      int fadeSec = data.fadeSec;
 
       if (morningStartMins > 59) {
         morningStartHours++;
@@ -563,7 +562,7 @@ void loop() {
 
         fade = 0;
         fadeInc = (float)pwmResolution / (float)maxSecs;
-        startFadingIn = 1;
+        startFadingInMorning = 1;
 
         Serial.print("FADE IN TIME :");
         Serial.print(maxSecs);
@@ -571,19 +570,19 @@ void loop() {
         Serial.println(fadeInc);
       }
 
-      if (startFadingIn) {
+      if (startFadingInMorning) {
         if (secs < maxSecs) {
-          Serial.print("Fading in: ");
+          Serial.print("Fading in morning : ");
           Serial.println(fade);
           analogWrite(PWM_LEDS, fade);
           fade += fadeInc;
           secs++;
         }
         else {
-          Serial.println("Fading in: 4095");
+          Serial.println("Fading in morning : 4095");
           secs = 0;
-          startFadingIn = 0;
-          startFadingOut = 0;
+          startFadingInMorning = 0;
+          startFadingOutMorning = 0;
           analogWrite(PWM_LEDS, 4095);
         }
       }
@@ -597,7 +596,7 @@ void loop() {
 
         fade = pwmResolution;
         fadeDec = (float)pwmResolution / (float)maxSecs;
-        startFadingOut = 1;
+        startFadingOutMorning = 1;
 
         Serial.print("FADE OUT TIME :");
         Serial.print(maxSecs);
@@ -605,19 +604,19 @@ void loop() {
         Serial.println(fadeDec);
       }
 
-      if (startFadingOut) {
+      if (startFadingOutMorning) {
         if (secs < maxSecs) {
-          Serial.print("Fading out: ");
+          Serial.print("Fading out morning : ");
           Serial.println(fade);
           analogWrite(PWM_LEDS, fade);
           fade -= fadeDec;
           secs++;
         }
         else {
-          Serial.println("Fading out: 0");
+          Serial.println("Fading out morning : 0");
           secs = 0;
-          startFadingOut = 0;
-          startFadingIn = 0;
+          startFadingOutMorning = 0;
+          startFadingInMorning = 0;
           analogWrite(PWM_LEDS, 0);
         }
       }
@@ -630,7 +629,7 @@ void loop() {
 
         fade = 0;
         fadeInc = (float)pwmResolution / (float)maxSecs;
-        startFadingIn = 1;
+        startFadingInNight = 1;
 
         Serial.print("FADE IN TIME :");
         Serial.print(maxSecs);
@@ -638,19 +637,19 @@ void loop() {
         Serial.println(fadeInc);
       }
 
-      if (startFadingIn) {
+      if (startFadingInNight) {
         if (secs < maxSecs) {
-          Serial.print("Fading in: ");
+          Serial.print("Fading in night : ");
           Serial.println(fade);
           analogWrite(PWM_LEDS, fade);
           fade += fadeInc;
           secs++;
         }
         else {
-          Serial.println("Fading in: 4095");
+          Serial.println("Fading in night: 4095");
           secs = 0;
-          startFadingIn = 0;
-          startFadingOut = 0;
+          startFadingInNight = 0;
+          startFadingOutNight = 0;
           analogWrite(PWM_LEDS, 4095);
         }
       }
@@ -664,7 +663,7 @@ void loop() {
 
         fade = pwmResolution;
         fadeDec = (float)pwmResolution / (float)maxSecs;
-        startFadingOut = 1;
+        startFadingOutNight = 1;
 
         Serial.print("FADE OUT TIME :");
         Serial.print(maxSecs);
@@ -672,19 +671,19 @@ void loop() {
         Serial.println(fadeDec);
       }
 
-      if (startFadingOut) {
+      if (startFadingOutNight) {
         if (secs < maxSecs) {
-          Serial.print("Fading out: ");
+          Serial.print("Fading out night : ");
           Serial.println(fade);
           analogWrite(PWM_LEDS, fade);
           fade -= fadeDec;
           secs++;
         }
         else {
-          Serial.println("Fading out: 0");
+          Serial.println("Fading out night : 0");
           secs = 0;
-          startFadingOut = 0;
-          startFadingIn = 0;
+          startFadingOutNight = 0;
+          startFadingInNight = 0;
           analogWrite(PWM_LEDS, 0);
         }
       }

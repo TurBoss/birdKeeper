@@ -68,7 +68,7 @@ int startFadingInNight = 0;
 int startFadingOutNight = 0;
 
 unsigned long previousMillis = 0;
-unsigned long interval = 1000;
+unsigned long interval = 100;
 
 unsigned long backlightPreviousMillis = 0;
 unsigned long backlightInterval = 1000;
@@ -115,9 +115,9 @@ bool edit_mm2_m2_SS = false;
 
 int hoursInSecs = 0;
 int minutesInSecs = 0;
-int secs = 0;
-int maxSecs = 0;
-int lastSecs = 0;
+float secs = 0;
+float maxSecs = 0;
+float lastSecs = 0;
 
 int pwmResolution = 4095;
 
@@ -576,7 +576,7 @@ void loop() {
           Serial.println(fade);
           analogWrite(PWM_LEDS, fade);
           fade += fadeInc;
-          secs++;
+          secs += 0.1;
         }
         else {
           Serial.println("Fading in morning : 4095");
@@ -610,7 +610,7 @@ void loop() {
           Serial.println(fade);
           analogWrite(PWM_LEDS, fade);
           fade -= fadeDec;
-          secs++;
+          secs += 0.1;
         }
         else {
           Serial.println("Fading out morning : 0");
@@ -643,7 +643,7 @@ void loop() {
           Serial.println(fade);
           analogWrite(PWM_LEDS, fade);
           fade += fadeInc;
-          secs++;
+          secs += 0.1;;
         }
         else {
           Serial.println("Fading in night: 4095");
@@ -677,7 +677,7 @@ void loop() {
           Serial.println(fade);
           analogWrite(PWM_LEDS, fade);
           fade -= fadeDec;
-          secs++;
+          secs += 0.1;;
         }
         else {
           Serial.println("Fading out night : 0");
